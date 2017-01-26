@@ -9,8 +9,8 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); /
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
 
-server.listen(3000, function(){
-	console.log('listening on *:3000');
+server.listen(5000, function(){
+	console.log('listening on *:5000');
 });
 
 app.get('/', function(req, res){
