@@ -12,7 +12,7 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 var port = process.env.port || 3000;
 
 app.listen(port, function () {
-	console.log('listening on *:3000');
+	console.log('listening on *:'+port);
 });
 
 app.get('/', function(req, res){
