@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<script>
-			var socket = io();
+			var socket = io.connect('/');
 			$('form').submit(function(){
 				socket.emit('chat message', $('#nomeUsuario').val() + ':' + $('#m').val());
 				$('#m').val('');
