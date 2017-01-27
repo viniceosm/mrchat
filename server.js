@@ -9,8 +9,10 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); /
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
 
-server.listen(PORT, function(){
-	console.log('listening on ${ PORT }');
+var port = process.env.port || 3000;
+
+app.listen(port, function () {
+	console.log('listening on *:3000');
 });
 
 app.get('/', function(req, res){
