@@ -4,7 +4,7 @@ imgTabuleiro.src = '../img/tabuleiro.png';
 imgPersonagem.src = '../img/personagem.png';
 
 window.onload = function() {
-	var socket = io.connect('/');
+	var socket = io.connect();
 	$('#formUsuario').submit(function(e){
 		e.preventDefault();
 		socket.emit('novo usuario', $('#nomeUsuario').val(), function(dado){
