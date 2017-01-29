@@ -12,7 +12,9 @@ app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redi
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
 // app.use('/js', express.static(__dirname + '/node_modules/socket.io-client/dist'));
 
-server.listen(process.env.port || 3000);
+app.listen(process.env.PORT || 5000, function () {
+	console.log('listening on *:'+process.env.PORT);
+});
 
 app.get('/', function(req, res){
 	res.sendFile(__dirname +'/index.html');
