@@ -17,27 +17,48 @@ window.onload = function() {
 	});
 
 	$('#paneMensagem').submit(function(){
-		socket.emit('chat message', $('#txtMensagem').val());
-		$('#txtMensagem').val('');
+		if($('#txtMensagem').val()!=""){
+			socket.emit('chat message', $('#txtMensagem').val());
+			$('#txtMensagem').val('');
+		}
 		return false;
 	});
 	socket.on('chat message', function(dado){
 		$('#mensagens').append('<li><strong>'+dado.user +'</strong>:'+ dado.msg);
 	});
 
-	$(window).keyup(function (e)  {
-		if(e.keyCode == 39){
-			socket.emit('mover personagem', "direita");
-		}else if(e.keyCode == 37){
-			socket.emit('mover personagem', "esquerda");
-		}else if(e.keyCode == 38){
-			socket.emit('mover personagem', "cima");
-		}else if(e.keyCode == 40){
-			socket.emit('mover personagem', "baixo");
-		}else if(e.keyCode == 13){
-			$('#txtMensagem').focus();
+	// window.onkeydown = function(e){
+	// 	console.log('trau');
+	// 	if(e.keyCode == 39){
+	// 		socket.emit('mover personagem', "direita");
+	// 	}else if(e.keyCode == 37){
+	// 		socket.emit('mover personagem', "esquerda");
+	// 	}else if(e.keyCode == 38){
+	// 		socket.emit('mover personagem', "cima");
+	// 	}else if(e.keyCode == 40){
+	// 		socket.emit('mover personagem', "baixo");
+	// 	}else if(e.keyCode == 13){
+	// 		$('#txtMensagem').focus();
+	// 	}
+	// };
+
+window.addEventListener("keydown", (function(canMove) {
+	return function(event) {
+		if (!canMove) return false;
+		canMove = false;
+		setTimeout(function() { canMove = true; }, 100);
+		switch (event.keyCode) {
+			case 39: return move("direita");
+			case 40: return move("baixo");
+			case 37: return move("esquerda");
+			case 38: return move("cima");
 		}
-	});
+	};
+})(true), false);
+
+function move(direction) {
+	socket.emit('mover personagem', direction);
+}
 
 	canvas = document.getElementById('tabuleiro');
 	ctx = canvas.getContext("2d");
